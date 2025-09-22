@@ -1,0 +1,19 @@
+Package: IOMEDohdsi
+Title: IOMED OHDSI Utilities
+Version: 0.1.0
+Author: Your Name <your.email@example.com>
+Description: A collection of utility functions for working with OHDSI data at IOMED.
+License: MIT
+Encoding: UTF-8
+RoxygenNote: 7.3.3
+Imports:
+    dplyr,
+    dbplyr,
+    glue,
+    magrittr,
+    omopgenerics,
+    ggplot2,
+    tidyr,
+    rlang
+Depends:
+    R (>= 2.10)
