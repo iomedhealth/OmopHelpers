@@ -8,7 +8,7 @@ You can install OmopHelpers from GitHub using the `devtools` package:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("your-github-username/OmopHelpers")
+devtools::install_github("iomedhealth/OmopHelpers")
 ```
 
 ## Usage
