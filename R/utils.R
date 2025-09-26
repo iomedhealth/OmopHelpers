@@ -3,6 +3,7 @@
 #' @importFrom ggplot2 ggplot
 #' @importFrom tidyr pivot_longer
 #' @importFrom rlang .data
+#' @importFrom tibble deframe
 NULL
 
 #' @title getCodelistFromConceptSet
@@ -199,16 +200,20 @@ plotMeasurementDistribution <- function(data, variable, variableDisplay, plotTit
 #' @return The cleaned character string without the trailing code.
 #' @export
 clean_name <- function(name_string) {
-  # The updated regular expression `\\s*–\\s*\\d+$` is more specific:
-  # \\s*: Matches zero or more whitespace characters.
-  # –: Matches the specific dash character.
-  # \\s*: Matches zero or more whitespace characters.
-  # \\d+: Matches one or more digits.
-  # $: Anchors the pattern to the end of the string, ensuring only the
-  #    last instance of the pattern is removed.
+  # 1. Convert to lowercase
+  name <- tolower(name_string)
+  # 2. Remove trailing numeric codes (existing functionality)
+  name <- gsub("\\s*[–-]\\s*\\d+$", "", name)
+  # 3. Replace any non-alphanumeric characters (except underscores) with a space
+  name <- gsub("[^a-z0-9_]+", " ", name)
+  # 4. Replace spaces with a single underscore
+  name <- gsub("\\s+", "_", name)
+  # 5. Remove any leading or trailing underscores
+  name <- gsub("^_+|_+$", "", name)
+  # 6. Remove duplicate underscores
+  name <- gsub("__+", "_", name)
   
-  cleaned_string <- gsub("\\s*[–-]\\s*\\d+$", "", name_string, fixed = FALSE)
-  return(cleaned_string)
+  return(name)
 }
 
 #' @title process_codelists
@@ -245,6 +250,46 @@ process_codelists <- function(codelist_vector) {
   }
   
   return(processed_list)
+}
+
+
+#' @title getAllConceptSets
+#' @description
+#' Retrieves all concept sets from the database and returns them as a named list of codelists.
+#'
+#' @param con A DBI connection to the database.
+#' @param cdmSchema The name of the schema where the OMOP tables reside.
+#'
+#' @return A named list of `codelist` objects.
+#' @export
+getAllConceptSets <- function(con, cdmSchema) {
+  # Point to the required vocabulary tables in the database
+  concept_set_tbl <- dplyr::tbl(con, dbplyr::in_schema(cdmSchema, "concept_set"))
+  concept_set_item_tbl <- dplyr::tbl(con, dbplyr::in_schema(cdmSchema, "concept_set_item"))
+
+  # Retrieve all concept sets and their items in a single query
+  all_concepts_in_sets <- concept_set_tbl |>
+    dplyr::inner_join(concept_set_item_tbl, by = "concept_set_id") |>
+    dplyr::select("concept_set_name", "concept_id") |>
+    dplyr::collect()
+
+  # Process the collected data into a named list of codelists
+  codelist_data <- all_concepts_in_sets |>
+    dplyr::mutate(concept_set_name = sapply(.data$concept_set_name, clean_name)) |>
+    dplyr::group_by(.data$concept_set_name) |>
+    dplyr::summarise(concept_ids = list(.data$concept_id)) |>
+    tibble::deframe()
+
+  # Create the final list of newCodelist objects
+  all_codelists <- lapply(codelist_data, function(ids) {
+    omopgenerics::newCodelist(list(ids))
+  })
+
+  # Rename the elements of the list to match the concept set names
+  names(all_codelists) <- names(codelist_data)
+
+
+  return(all_codelists)
 }
 
 # PATCH the table person
