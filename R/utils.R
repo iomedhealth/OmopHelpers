@@ -301,32 +301,3 @@ getAllConceptSets <- function(con, cdmSchema) {
 
   return(all_codelists)
 }
-
-# PATCH the table person
-
-# 1. Define the corrected version of the internal function
-fixed_summariseNumeric2 <- function(x, variable, den) {
-  x |>
-    dplyr::rename(variable_level = !!variable) |>
-    dplyr::summarise(
-      # This uses if_else() to generate database-compatible SQL
-      count_missing = sum(dplyr::if_else(is.na(.data$variable_level), 1L, 0L), na.rm = TRUE),
-      count_0 = sum(dplyr::if_else(.data$variable_level == 0, 1L, 0L), na.rm = TRUE),
-      distinct_values = as.integer(dplyr::n_distinct(.data$variable_level))
-    ) |>
-    dplyr::collect() |>
-    dplyr::mutate(
-      count_missing = dplyr::coalesce(as.integer(.data$count_missing), 0L),
-      count_0 = dplyr::coalesce(as.integer(.data$count_0), 0L),
-      distinct_values = dplyr::coalesce(.data$distinct_values, 0L),
-      percentage_missing = 100 * as.numeric(.data$count_missing) / den,
-      percentage_0 = 100 * as.numeric(.data$count_0) / den
-    )
-}
-
-# 2. Programmatically overwrite the internal function in the package's namespace
-assignInNamespace(
-  x = "summariseNumeric2",
-  value = fixed_summariseNumeric2,
-  ns = "OmopSketch"
-)
