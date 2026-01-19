@@ -1,5 +1,11 @@
 # OmopHelpers
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/iomedhealth/OmopHelpers/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iomedhealth/OmopHelpers/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+
 `OmopHelpers` is an R package that provides a collection of utility functions for working with OHDSI data, particularly within the IOMED environment. It simplifies common tasks such as creating codelists, merging them, and visualizing data distributions.
 
 ## Installation

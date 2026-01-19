@@ -19,6 +19,13 @@ A named `codelist` object.
 \description{
 This function queries the `concept_set` and `concept_set_item` tables
 to build a formal `codelist` object from the `omopgenerics` package.
-The codelist is automatically named using the `concept_set_name` from the
-`concept_set` table.
+}
+\examples{
+\dontrun{
+library(DBI)
+library(duckdb)
+con <- dbConnect(duckdb::duckdb())
+# ... setup concept tables ...
+codes <- getCodelistFromConceptSet(123, con, "main")
+}
 }
