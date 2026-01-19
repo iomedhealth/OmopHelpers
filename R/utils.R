@@ -17,6 +17,15 @@ NULL
 #'
 #' @return A named `codelist` object.
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(DBI)
+#' library(duckdb)
+#' con <- dbConnect(duckdb::duckdb())
+#' # ... setup concept tables ...
+#' codes <- getCodelistFromConceptSet(123, con, "main")
+#' }
 getCodelistFromConceptSet <- function(conceptSetId, con, cdmSchema) {
   concept_set_ref <- DBI::Id(schema = cdmSchema, table = "concept_set")
   concept_set_item_ref <- DBI::Id(schema = cdmSchema, table = "concept_set_item")
