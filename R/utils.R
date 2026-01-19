@@ -37,7 +37,7 @@ getCodelistFromConceptSet <- function(conceptSetId, con, cdmSchema) {
   # Retrieve concept set data in a single joined query
   concept_data <- concept_set_tbl |>
     dplyr::inner_join(concept_set_item_tbl, by = "concept_set_id") |>
-    dplyr::filter(.data$concept_set_id == .env$conceptSetId) |>
+    dplyr::filter(.data$concept_set_id == rlang::.env$conceptSetId) |>
     dplyr::select("concept_set_name", "concept_id") |>
     dplyr::collect()
 
@@ -52,7 +52,9 @@ getCodelistFromConceptSet <- function(conceptSetId, con, cdmSchema) {
 
   # Warning if multiple names exist for the same ID
   if (length(codelistName) > 1) {
-    warning(glue::glue("Multiple names found for concept_set_id: {conceptSetId}. Using the first one: '{codelistName[1]}'"))
+    warning(glue::glue(
+      "Multiple names found for concept_set_id: {conceptSetId}. Using the first one: '{codelistName[1]}'"
+    ))
     codelistName <- codelistName[1]
   }
 
@@ -62,7 +64,7 @@ getCodelistFromConceptSet <- function(conceptSetId, con, cdmSchema) {
     magrittr::set_names(codelistName)
 
   # Return the formal, validated codelist object
-  return(omopgenerics::newCodelist(codelist))
+  omopgenerics::newCodelist(codelist)
 }
 
 #' @title mergeCodelists
@@ -111,7 +113,7 @@ mergeCodelists <- function(..., newName) {
     magrittr::set_names(newName)
 
   # 6. Return the formal, validated codelist object.
-  return(omopgenerics::newCodelist(merged_list_structure))
+  omopgenerics::newCodelist(merged_list_structure)
 }
 
 #' @title plotMeasurementDistribution (Fully Configurable)
@@ -174,7 +176,7 @@ plotMeasurementDistribution <- function(data, variable, variableDisplay, plotTit
   # Add the chosen geometry layer
   if (plotType == "histogram") {
     plot <- plot + ggplot2::geom_histogram(bins = bins, alpha = 0.6, position = "identity")
-  } else { # plotType == "density"
+  } else { # For density plots
     plot <- plot + ggplot2::geom_density(alpha = 0.6)
   }
 
@@ -197,7 +199,7 @@ plotMeasurementDistribution <- function(data, variable, variableDisplay, plotTit
   }
 
 
-  return(plot)
+  plot
 }
 
 #' @title clean_name
@@ -223,7 +225,7 @@ clean_name <- function(name_string) {
   # 6. Remove duplicate underscores
   name <- gsub("__+", "_", name)
 
-  return(name)
+  name
 }
 
 #' @title process_codelists
@@ -259,7 +261,7 @@ process_codelists <- function(codelist_vector) {
     processed_list[[cleaned_name]] <- codelist_vector[[name]]
   }
 
-  return(processed_list)
+  processed_list
 }
 
 
@@ -299,5 +301,5 @@ getAllConceptSets <- function(con, cdmSchema) {
   names(all_codelists) <- names(codelist_data)
 
 
-  return(all_codelists)
+  all_codelists
 }
