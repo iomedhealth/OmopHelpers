@@ -1,6 +1,6 @@
 Package: OmopHelpers
 Title: IOMED's OHDSI OMOP Utilities
-Version: 0.1.0
+Version: 0.1.1
 Author: Gabriel Maeztu <gabriel.maeztu@iomed.health>
 Maintainer: Gabriel Maeztu <gabriel.maeztu@iomed.health>
 Description: A collection of utility functions for working with OHDSI data at IOMED.
