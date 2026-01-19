@@ -2,7 +2,7 @@
 #' @importFrom dplyr %>%
 #' @importFrom ggplot2 ggplot
 #' @importFrom tidyr pivot_longer
-#' @importFrom rlang .data
+#' @importFrom rlang .data .env
 #' @importFrom tibble deframe
 NULL
 

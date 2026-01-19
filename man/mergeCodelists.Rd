@@ -21,7 +21,7 @@ removes any duplicates.
 }
 \examples{
 \dontrun{
-  # Assuming bb_codes and ccb_codes are valid codelist objects
-  first_line_therapies <- mergeCodelists(bb_codes, ccb_codes, newName = "first_line_hcm_drugs")
+# Assuming bb_codes and ccb_codes are valid codelist objects
+first_line_therapies <- mergeCodelists(bb_codes, ccb_codes, newName = "first_line_hcm_drugs")
 }
 }
