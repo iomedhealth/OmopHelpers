@@ -14,6 +14,6 @@ test_that("process_codelists works correctly", {
   processed <- process_codelists(mock_codelist)
 
   expect_named(processed, c("code_a", "code_b"))
-  expect_equal(processed, list(1:5))
-  expect_equal(processed, list(6:10))
+  expect_equal(processed[["code_a"]], list(1:5))
+  expect_equal(processed[["code_b"]], list(6:10))
 })
