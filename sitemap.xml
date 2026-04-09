@@ -1,0 +1,17 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/404.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/AGENTS.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/LICENSE-text.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/authors.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/index.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/news/index.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/buildCodelistTree.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/clean_name.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/getAllConceptSets.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/getCodelistFromConceptSet.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/index.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/mergeCodelists.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/plotMeasurementDistribution.html</loc></url>
+<url><loc>https://iomedhealth.github.io/OmopHelpers/reference/process_codelists.html</loc></url>
+</urlset>
+
