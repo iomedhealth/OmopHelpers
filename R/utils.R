@@ -306,8 +306,8 @@ getAllConceptSets <- function(con, cdmSchema) {
 
 #' @title buildCodelistTree
 #' @description
-#' Traverses a nested list of concept sets (or codelists). For every node, it recursively 
-#' gathers all the concept IDs from its sub-nodes and leaves, and injects a new 
+#' Traverses a nested list of concept sets (or codelists). For every node, it recursively
+#' gathers all the concept IDs from its sub-nodes and leaves, and injects a new
 #' `omopgenerics::codelist` object named `$merged` into each level.
 #'
 #' @param node A list of lists or codelists, representing a semantic tree of concepts.
@@ -331,14 +331,14 @@ buildCodelistTree <- function(node, node_name = "root") {
   if (inherits(node, "codelist")) {
     return(node)
   }
-  
+
   if (is.list(node)) {
     # Recursively process children
     processed_children <- lapply(names(node), function(nm) {
       buildCodelistTree(node[[nm]], nm)
     })
     names(processed_children) <- names(node)
-    
+
     # Collect all concept IDs from leaves
     get_all_ids <- function(x) {
       if (inherits(x, "codelist")) {
@@ -347,23 +347,23 @@ buildCodelistTree <- function(node, node_name = "root") {
         if ("merged" %in% names(x)) {
           return(x$merged[[1]])
         } else {
-           ids <- unlist(lapply(x, get_all_ids))
-           return(ids)
+          ids <- unlist(lapply(x, get_all_ids))
+          return(ids)
         }
       }
       return(integer(0))
     }
-    
+
     all_ids <- unique(unlist(lapply(processed_children, get_all_ids)))
-    
+
     # Create the merged codelist
     merged_codelist <- omopgenerics::newCodelist(stats::setNames(list(as.integer(all_ids)), node_name))
-    
+
     # Return a new list containing the children and the merged codelist
     res <- processed_children
     res$merged <- merged_codelist
     return(res)
   }
-  
+
   stop("Invalid node type. Must be a list or a codelist.")
 }
