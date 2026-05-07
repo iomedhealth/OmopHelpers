@@ -6,6 +6,8 @@
   : buildCodelistTree
 - [`clean_name()`](https://iomedhealth.github.io/OmopHelpers/reference/clean_name.md)
   : clean_name
+- [`computeHospitalizationCohorts()`](https://iomedhealth.github.io/OmopHelpers/reference/computeHospitalizationCohorts.md)
+  : computeHospitalizationCohorts
 - [`getAllConceptSets()`](https://iomedhealth.github.io/OmopHelpers/reference/getAllConceptSets.md)
   : getAllConceptSets
 - [`getCodelistFromConceptSet()`](https://iomedhealth.github.io/OmopHelpers/reference/getCodelistFromConceptSet.md)

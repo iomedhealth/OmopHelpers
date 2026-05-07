@@ -10,6 +10,7 @@ merging them, and visualizing data distributions.
 You can install OmopHelpers from GitHub using the `devtools` package:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("iomedhealth/OmopHelpers")
 ```
@@ -22,6 +23,7 @@ The `getCodelistFromConceptSet` function allows you to create a
 `codelist` object directly from a `concept_set_id`.
 
 ``` r
+
 library(OmopHelpers)
 library(DBI)
 
@@ -42,6 +44,7 @@ You can merge multiple `codelist` objects into a single one using
 `mergeCodelists`.
 
 ``` r
+
 # Assuming 'codelist1' and 'codelist2' are two existing codelist objects
 merged_codes <- mergeCodelists(codelist1, codelist2, newName = "merged_codelist_name")
 ```
@@ -52,6 +55,7 @@ The `plotMeasurementDistribution` function generates a histogram or
 density plot for a given measurement.
 
 ``` r
+
 # Assume 'my_cohort_data' is a data frame or tibble
 # containing patient data and measurements.
 
