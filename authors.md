@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/iomedhealth/OmopHelpers/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/iomedhealth/OmopHelpers/blob/v0.1.4/DESCRIPTION)
 
 Maeztu G (2026). *OmopHelpers: IOMED's OHDSI OMOP Utilities*. R package
 version 0.1.4, <https://github.com/iomedhealth/OmopHelpers>.
