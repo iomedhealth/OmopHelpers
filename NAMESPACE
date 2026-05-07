@@ -2,6 +2,7 @@
 
 export(buildCodelistTree)
 export(clean_name)
+export(computeHospitalizationCohorts)
 export(getAllConceptSets)
 export(getCodelistFromConceptSet)
 export(mergeCodelists)
@@ -14,4 +15,3 @@ importFrom(rlang,.data)
 importFrom(rlang,.env)
 importFrom(tibble,deframe)
 importFrom(tidyr,pivot_longer)
-export(computeHospitalizationCohorts)

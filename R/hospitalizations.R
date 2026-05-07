@@ -120,7 +120,11 @@ computeHospitalizationCohorts <- function(cdm, name, visitConceptIds = c(9201, 2
       "visit_end_date"
     ) |>
     dplyr::mutate(
-      visit_end_date = dplyr::if_else(is.na(.data$visit_end_date), .data$visit_start_date, .data$visit_end_date)
+      visit_end_date = dplyr::case_when(
+        is.na(.data$visit_end_date) ~ .data$visit_start_date,
+        .data$visit_end_date < .data$visit_start_date ~ .data$visit_start_date,
+        .default = .data$visit_end_date
+      )
     ) |>
     dplyr::compute(name = paste0(tablePrefix, "raw_visits"), temporary = FALSE)
 

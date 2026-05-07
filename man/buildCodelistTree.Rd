@@ -15,8 +15,8 @@ buildCodelistTree(node, node_name = "root")
 A nested list identical in structure to the input, but with `$merged` elements added.
 }
 \description{
-Traverses a nested list of concept sets (or codelists). For every node, it recursively 
-gathers all the concept IDs from its sub-nodes and leaves, and injects a new 
+Traverses a nested list of concept sets (or codelists). For every node, it recursively
+gathers all the concept IDs from its sub-nodes and leaves, and injects a new
 `omopgenerics::codelist` object named `$merged` into each level.
 }
 \examples{
